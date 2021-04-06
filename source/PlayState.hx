@@ -677,14 +677,18 @@ class PlayState extends MusicBeatState
 		// healthBar
 		add(healthBar);
 
-		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
-		scoreTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
+		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 225, healthBarBG.y + 30, 0, "", 20);
+		scoreTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, CENTER);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
-		missesTxt = new FlxText(healthBarBG.x + healthBarBG.width - 110, healthBarBG.y + 30, 0, "", 20);
+		missesTxt = new FlxText(healthBarBG.x + healthBarBG.width - 90, healthBarBG.y + 30, 0, "", 20);
 		missesTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
 		missesTxt.scrollFactor.set();
 		add(missesTxt);
+		newbTxt = new FlxText(healthBarBG.x + healthBarBG.width - 450, healthBarBG.y + 30, "Newb Engine " + Application.current.meta.get('version'), 25);
+		newbTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
+		newbTxt.scrollFactor.set();
+		add(newbTxt);
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -1162,10 +1166,7 @@ class PlayState extends MusicBeatState
 							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
 					}
-				newbTxt = new FlxText(babyArrow.x + 50, babyArrow.y, 0, "Newb Engine\n" + Application.current.meta.get('version'), 20);
-				newbTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, LEFT);
-				newbTxt.scrollFactor.set();
-				add(newbTxt);
+
 			}
 
 			babyArrow.updateHitbox();
@@ -1279,6 +1280,7 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		scoreTxt.text = "Score:" + songScore;
+		missesTxt.text = "Misses: " + misses;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1589,6 +1591,7 @@ class PlayState extends MusicBeatState
 						{
 							health -= 0.0275;
 							vocals.volume = 0;
+							misses += 1;
 						}
 
 						daNote.active = false;
