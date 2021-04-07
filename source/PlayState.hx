@@ -128,6 +128,10 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		if (OptionsState.fullEnergy)
+			health = 2;
+		else
+			health = 1;
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();

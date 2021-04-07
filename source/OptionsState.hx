@@ -11,25 +11,27 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 
-class OptionsState extends MusicBeatSubstate
+// my code is shit so beware lol
+
+class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
+	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy'];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 
 	public static var healthMultiplier:Int = 1;
 	public static var scoreMultiplier:Int = 1;
+	public static var fullEnergy:Bool = true;
 
-	private var multiplierText:FlxText;
+	private var optionText:FlxText;
 
     override public function create():Void
     {
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
-		multiplierText = new FlxText(1200, 1, 0, "", 100);
-		multiplierText.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
-		multiplierText.scrollFactor.set();
-		add(multiplierText);
+		optionText = new FlxText(1130, 10, 128, "", 100);
+		optionText.setFormat("assets/fonts/vcr.ttf", 64, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
+		add(optionText);
 
 		menuItems = new FlxTypedGroup<Alphabet>();
 		add(menuItems);
@@ -46,10 +48,16 @@ class OptionsState extends MusicBeatSubstate
 
     override function update(elapsed:Float)
 		{
-			if (curSelected == 0)
-				multiplierText.text = healthMultiplier + "x";
+			// this entire thing can also be improved
+			if (curSelected == 0){
+				optionText.text = healthMultiplier + "x";
+			}
+			else if (curSelected == 1){
+				optionText.text = scoreMultiplier + "x";
+			}
 			else
-				multiplierText.text = scoreMultiplier + "x";
+				optionText.text = boolToOnOff(fullEnergy);
+			// end of shit code
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
 			var accepted = controls.ACCEPT;
@@ -63,17 +71,25 @@ class OptionsState extends MusicBeatSubstate
 			{
 				changeSelection(1);
 			}
-			// Ugh - Friday Night Funkin OST
+			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
-				if (curSelected == 0)
+			{
+				if (curSelected == 0 && healthMultiplier >= 2)
 					healthMultiplier -= 1;
-				else
+				if (curSelected == 1 && scoreMultiplier >= 2)
 					scoreMultiplier -= 1;
+				if (curSelected == 2)
+					fullEnergy = false;
+			}
 			if (controls.RIGHT_P)
-				if (curSelected == 0)
+			{
+				if (curSelected == 0 && healthMultiplier <= 4)
 					healthMultiplier += 1;
-				else
+				if (curSelected == 1 && scoreMultiplier <= 4)
 					scoreMultiplier += 1;
+				if (curSelected == 2)
+					fullEnergy = true;
+			}
 
 			if (back)
 			{
@@ -111,5 +127,12 @@ class OptionsState extends MusicBeatSubstate
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
+	}
+	function boolToOnOff(variable:Bool = true)
+	{
+		if (variable)
+			return "ON";
+		else
+			return "OFF";
 	}
 }
