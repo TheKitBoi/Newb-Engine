@@ -20,14 +20,16 @@ class OptionsState extends MusicBeatSubstate
 	public static var healthMultiplier:Int = 1;
 	public static var scoreMultiplier:Int = 1;
 
-	var multiplierText = new FlxText(0, 0, 2, "", 40);
+	private var multiplierText:FlxText;
 
     override public function create():Void
     {
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
-		multiplierText.setFormat("assets/fonts/vcr.ttf", 32, FlxColor.WHITE, RIGHT);
+		multiplierText = new FlxText(1200, 1, 0, "", 100);
+		multiplierText.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
 		multiplierText.scrollFactor.set();
+		add(multiplierText);
 
 		menuItems = new FlxTypedGroup<Alphabet>();
 		add(menuItems);
@@ -44,6 +46,10 @@ class OptionsState extends MusicBeatSubstate
 
     override function update(elapsed:Float)
 		{
+			if (curSelected == 0)
+				multiplierText.text = healthMultiplier + "x";
+			else
+				multiplierText.text = scoreMultiplier + "x";
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
 			var accepted = controls.ACCEPT;
@@ -73,11 +79,6 @@ class OptionsState extends MusicBeatSubstate
 			{
 				FlxG.switchState(new MainMenuState());
 			}	
-
-			if (accepted)
-			{
-				// we dont NEED to press enter :eyes:
-			}
 			super.update(elapsed);
 		}	
 	function changeSelection(change:Int = 0)
