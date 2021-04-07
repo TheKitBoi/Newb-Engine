@@ -15,13 +15,14 @@ import lime.utils.Assets;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy'];
+	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy', 'Antispam'];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 
 	public static var healthMultiplier:Int = 1;
 	public static var scoreMultiplier:Int = 1;
 	public static var fullEnergy:Bool = true;
+	public static var antiSpam:Bool = false;
 
 	private var optionText:FlxText;
 
@@ -48,16 +49,16 @@ class OptionsState extends MusicBeatState
 
     override function update(elapsed:Float)
 		{
-			// this entire thing can also be improved
-			if (curSelected == 0){
-				optionText.text = healthMultiplier + "x";
+			switch(curSelected){
+				case 0:
+					optionText.text = healthMultiplier + "x";
+				case 1:
+					optionText.text = scoreMultiplier + "x";
+				case 2:
+					optionText.text = boolToOnOff(fullEnergy);
+				case 3:
+					optionText.text = boolToOnOff(antiSpam);
 			}
-			else if (curSelected == 1){
-				optionText.text = scoreMultiplier + "x";
-			}
-			else
-				optionText.text = boolToOnOff(fullEnergy);
-			// end of shit code
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
 			var accepted = controls.ACCEPT;
@@ -74,21 +75,33 @@ class OptionsState extends MusicBeatState
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
 			{
-				if (curSelected == 0 && healthMultiplier >= 2)
-					healthMultiplier -= 1;
-				if (curSelected == 1 && scoreMultiplier >= 2)
-					scoreMultiplier -= 1;
-				if (curSelected == 2)
-					fullEnergy = false;
+				switch(curSelected){
+					case 0:
+						if (healthMultiplier >= 2)
+							healthMultiplier -= 1;
+					case 1:
+						if (scoreMultiplier >= 2)
+							scoreMultiplier -= 1;
+					case 2:
+						fullEnergy = false;
+					case 3:
+						antiSpam = false;
+				}
 			}
 			if (controls.RIGHT_P)
 			{
-				if (curSelected == 0 && healthMultiplier <= 4)
-					healthMultiplier += 1;
-				if (curSelected == 1 && scoreMultiplier <= 4)
-					scoreMultiplier += 1;
-				if (curSelected == 2)
-					fullEnergy = true;
+				switch(curSelected){
+					case 0:
+						if (healthMultiplier <= 4)
+							healthMultiplier += 1;
+					case 1:
+						if (scoreMultiplier <= 4)
+							scoreMultiplier += 1;
+					case 2:
+						fullEnergy = true;
+					case 3:
+						antiSpam = true;
+				}
 			}
 
 			if (back)

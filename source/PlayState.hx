@@ -2050,6 +2050,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
+			misses += 1;
 			health -= 0.04 * OptionsState.healthMultiplier;
 			if (combo > 5)
 			{
@@ -2087,7 +2088,22 @@ class PlayState extends MusicBeatState
 
 	function badNoteCheck()
 	{
-		// removed anti-spam cuz this is noob engine xd
+		if(OptionsState.antiSpam)
+		{
+			var upP = controls.UP_P;
+			var rightP = controls.RIGHT_P;
+			var downP = controls.DOWN_P;
+			var leftP = controls.LEFT_P;
+
+			if (leftP)
+				noteMiss(0);
+			if (downP)
+				noteMiss(1);
+			if (upP)
+				noteMiss(2);
+			if (rightP)
+				noteMiss(3);
+		}
 	}
 
 	function noteCheck(keyP:Bool, note:Note):Void
