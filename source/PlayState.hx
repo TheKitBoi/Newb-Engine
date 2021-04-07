@@ -1589,7 +1589,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							health -= 0.0275;
+							health -= 0.0285 * OptionsState.healthMultiplier;
 							vocals.volume = 0;
 							misses += 1;
 						}
@@ -1730,7 +1730,7 @@ class PlayState extends MusicBeatState
 			score = 400;
 		}
 
-		songScore += score;
+		songScore += score * OptionsState.scoreMultiplier;
 
 		/* if (combo > 60)
 				daRating = 'sick';
@@ -2046,14 +2046,14 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.02;
+			health -= 0.04 * OptionsState.healthMultiplier;
 			if (combo > 5)
 			{
 				gf.playAnim('sad');
 			}
 			combo = 0;
 
-			songScore -= 10;
+			songScore -= 10 * OptionsState.scoreMultiplier;
 
 			FlxG.sound.play('assets/sounds/missnote' + FlxG.random.int(1, 3) + TitleState.soundExt, FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play('assets/sounds/missnote1' + TitleState.soundExt, 1, false);
@@ -2107,9 +2107,9 @@ class PlayState extends MusicBeatState
 			}
 
 			if (note.noteData >= 0)
-				health += 0.063;
+				health += 0.063 * OptionsState.healthMultiplier;
 			else
-				health += 0.024;
+				health += 0.024 * OptionsState.healthMultiplier;
 
 			switch (note.noteData)
 			{
