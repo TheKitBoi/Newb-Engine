@@ -15,7 +15,7 @@ import lime.utils.Assets;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy', 'Antispam'];
+	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy', 'Antispam', 'Bot Mode'];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 
@@ -23,6 +23,7 @@ class OptionsState extends MusicBeatState
 	public static var scoreMultiplier:Int = 1;
 	public static var fullEnergy:Bool = true;
 	public static var antiSpam:Bool = false;
+	public static var botMode:Bool = false;
 
 	private var optionText:FlxText;
 
@@ -58,6 +59,8 @@ class OptionsState extends MusicBeatState
 					optionText.text = boolToOnOff(fullEnergy);
 				case 3:
 					optionText.text = boolToOnOff(antiSpam);
+				case 4:
+					optionText.text = boolToOnOff(botMode);
 			}
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
@@ -86,6 +89,8 @@ class OptionsState extends MusicBeatState
 						fullEnergy = false;
 					case 3:
 						antiSpam = false;
+					case 4:
+						botMode = false;
 				}
 			}
 			if (controls.RIGHT_P)
@@ -101,6 +106,8 @@ class OptionsState extends MusicBeatState
 						fullEnergy = true;
 					case 3:
 						antiSpam = true;
+					case 4:
+						botMode= true;
 				}
 			}
 

@@ -61,7 +61,10 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic('assets/images/weeb/pixelUI/arrowEnds.png', true, 7, 6);
+					if(OptionsState.botMode == true)
+						loadGraphic('assets/images/weeb/pixelUI/arrowEnds-bot.png', true, 7, 6);
+					else
+						loadGraphic('assets/images/weeb/pixelUI/arrowEnds.png', true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);

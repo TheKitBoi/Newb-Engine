@@ -91,7 +91,7 @@ class PlayState extends MusicBeatState
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = ['we out here', 'being coolswag'];
 
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
@@ -116,6 +116,7 @@ class PlayState extends MusicBeatState
 	var scoreTxt:FlxText;
 	var missesTxt:FlxText;
 	var newbTxt:FlxText;
+	var botTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
 
@@ -693,6 +694,11 @@ class PlayState extends MusicBeatState
 		newbTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
 		newbTxt.scrollFactor.set();
 		add(newbTxt);
+		botTxt = new FlxText(healthBarBG.x, healthBarBG.width, "Bot Mode Enabled", 20);
+		botTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, CENTER);
+		botTxt.scrollFactor.set();
+		if (OptionsState.botMode)
+			add(botTxt);
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -711,6 +717,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		newbTxt.cameras = [camHUD];
 		missesTxt.cameras = [camHUD];
+		botTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -1593,7 +1600,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							health -= 0.0285 * OptionsState.healthMultiplier;
+							health -= 0.0475 * OptionsState.healthMultiplier;
 							vocals.volume = 0;
 							misses += 1;
 						}
@@ -1632,7 +1639,8 @@ class PlayState extends MusicBeatState
 
 		if (isStoryMode)
 		{
-			campaignScore += songScore;
+			if(!OptionsState.botMode)
+				campaignScore += songScore;
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
@@ -1714,24 +1722,24 @@ class PlayState extends MusicBeatState
 		//
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 550;
+		var score:Int = 350;
 
 		var daRating:String = "sick";
 
 		if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
 			daRating = 'shit';
-			score = 250;
+			score = 50;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
 			daRating = 'bad';
-			score = 300;
+			score = 100;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
 			daRating = 'good';
-			score = 400;
+			score = 200;
 		}
 
 		songScore += score * OptionsState.scoreMultiplier;
@@ -1875,7 +1883,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
+		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || OptionsState.botMode)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -1909,7 +1917,7 @@ class PlayState extends MusicBeatState
 					{
 						for (coolNote in possibleNotes)
 						{
-							if (controlArray[coolNote.noteData])
+							if (controlArray[coolNote.noteData] || OptionsState.botMode)
 								goodNoteHit(coolNote);
 							else
 							{
@@ -1981,22 +1989,7 @@ class PlayState extends MusicBeatState
 			{
 				if (daNote.canBeHit && daNote.mustPress && daNote.isSustainNote)
 				{
-					switch (daNote.noteData)
-					{
-						// NOTES YOU ARE HOLDING
-						case 0:
-							if (left)
-								goodNoteHit(daNote);
-						case 1:
-							if (down)
-								goodNoteHit(daNote);
-						case 2:
-							if (up)
-								goodNoteHit(daNote);
-						case 3:
-							if (right)
-								goodNoteHit(daNote);
-					}
+					goodNoteHit(daNote);
 				}
 			});
 		}
@@ -2016,22 +2009,22 @@ class PlayState extends MusicBeatState
 				case 0:
 					if (leftP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (leftR)
+					if (leftR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 1:
 					if (downP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (downR)
+					if (downR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 2:
 					if (upP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (upR)
+					if (upR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 3:
 					if (rightP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (rightR)
+					if (rightR || OptionsState.botMode)
 						spr.animation.play('static');
 			}
 
@@ -2088,7 +2081,7 @@ class PlayState extends MusicBeatState
 
 	function badNoteCheck()
 	{
-		if(OptionsState.antiSpam)
+		if(OptionsState.antiSpam && !OptionsState.botMode)
 		{
 			var upP = controls.UP_P;
 			var rightP = controls.RIGHT_P;
@@ -2108,8 +2101,9 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
-		if (keyP)
+		if (keyP || OptionsState.botMode){
 			goodNoteHit(note);
+		}
 		else
 		{
 			badNoteCheck();
@@ -2127,9 +2121,9 @@ class PlayState extends MusicBeatState
 			}
 
 			if (note.noteData >= 0)
-				health += 0.063 * OptionsState.healthMultiplier;
+				health += 0.023 * OptionsState.healthMultiplier;
 			else
-				health += 0.024 * OptionsState.healthMultiplier;
+				health += 0.004 * OptionsState.healthMultiplier;
 
 			switch (note.noteData)
 			{
