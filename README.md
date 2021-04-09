@@ -1,18 +1,22 @@
-# Friday Night Funkin
+# Friday Night Funkin' Newb Engine
 
-This is the repository for Friday Night Funkin, a game originally made for Ludum Dare 47 "Stuck In a Loop".
+This is the repository for Newb Engine, a mod for a game called 'Friday Night Funkin', originally made for Ludum Dare 47 "Stuck In a Loop".
 
+Download the mod here: https://gamebanana.com/gamefiles/19689
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
 Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
 Support the project on the itch.io page: https://ninja-muffin24.itch.io/funkin
 
 ## Credits / shoutouts
 
-- [ninjamuffin99 (me!)](https://twitter.com/ninja_muffin99) - Programmer
+- [hdboye](https://twitter.com/morehdboye) - Mod Programmer
+- [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programmer
 - [PhantomArcade3K](https://twitter.com/phantomarcade3k) and [Evilsk8r](https://twitter.com/evilsk8r) - Art
 - [Kawaisprite](https://twitter.com/kawaisprite) - Musician
 
 This game was made with love to Newgrounds and it's community. Extra love to Tom Fulp.
+
+This mod was inspired by [KadeDev's Kade Engine](https://github.com/KadeDev/Kade-Engine)
 
 ## Build instructions
 
@@ -35,6 +39,7 @@ Other installations you'd need is the additional libraries, a fully updated list
 hscript
 flixel-ui
 newgrounds
+flixel-addons
 ```
 
 So for each of those type `haxelib install [library]` so shit like `haxelib install newgrounds`
