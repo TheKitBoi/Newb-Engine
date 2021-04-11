@@ -50,6 +50,7 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
+	public static var noteDiff:Float;
 
 	var halloweenLevel:Bool = false;
 
@@ -1710,7 +1711,8 @@ class PlayState extends MusicBeatState
 
 	private function popUpScore(strumtime:Float):Void
 	{
-		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
+		noteDiff = Math.abs(strumtime - Conductor.songPosition);
+		// noteDiff > Conductor.safeZoneOffset * 0
 		// boyfriend.playAnim('hey');
 		vocals.volume = 1;
 
@@ -1883,7 +1885,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || OptionsState.botMode)
+		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -2009,22 +2011,22 @@ class PlayState extends MusicBeatState
 				case 0:
 					if (leftP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (leftR || OptionsState.botMode)
+					if (leftR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
 						spr.animation.play('static');
 				case 1:
 					if (downP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (downR || OptionsState.botMode)
+					if (downR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
 						spr.animation.play('static');
 				case 2:
 					if (upP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (upR || OptionsState.botMode)
+					if (upR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
 						spr.animation.play('static');
 				case 3:
 					if (rightP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (rightR || OptionsState.botMode)
+					if (rightR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
 						spr.animation.play('static');
 			}
 
