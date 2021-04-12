@@ -143,6 +143,8 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
+		// i tried soemthing here.. didnt work.. crying
+		// FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
 		persistentUpdate = true;
 		persistentDraw = true;
@@ -695,7 +697,7 @@ class PlayState extends MusicBeatState
 		newbTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
 		newbTxt.scrollFactor.set();
 		add(newbTxt);
-		botTxt = new FlxText(healthBarBG.x, healthBarBG.width, "Bot Mode Enabled", 20);
+		botTxt = new FlxText(healthBarBG.x + healthBarBG.width - 225, healthBarBG.y, "Bot Mode Enabled", 20);
 		botTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, CENTER);
 		botTxt.scrollFactor.set();
 		if (OptionsState.botMode)
@@ -2011,22 +2013,22 @@ class PlayState extends MusicBeatState
 				case 0:
 					if (leftP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (leftR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
+					if (leftR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 1:
 					if (downP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (downR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
+					if (downR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 2:
 					if (upP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (upR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
+					if (upR || OptionsState.botMode)
 						spr.animation.play('static');
 				case 3:
 					if (rightP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (rightR || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0.1)
+					if (rightR || OptionsState.botMode)
 						spr.animation.play('static');
 			}
 

@@ -19,6 +19,7 @@ class OptionsState extends MusicBeatState
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 
+	// startup values might make a saving system later????? 
 	public static var healthMultiplier:Int = 1;
 	public static var scoreMultiplier:Int = 1;
 	public static var fullEnergy:Bool = true;
