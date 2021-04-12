@@ -697,7 +697,7 @@ class PlayState extends MusicBeatState
 		newbTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
 		newbTxt.scrollFactor.set();
 		add(newbTxt);
-		botTxt = new FlxText(healthBarBG.x + healthBarBG.width - 225, healthBarBG.y, "Bot Mode Enabled", 20);
+		botTxt = new FlxText(healthBarBG.x + healthBarBG.width - 225, healthBarBG.y, "Bot Mode Enabled", 15);
 		botTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, CENTER);
 		botTxt.scrollFactor.set();
 		if (OptionsState.botMode)
