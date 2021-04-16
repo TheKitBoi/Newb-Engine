@@ -15,7 +15,9 @@ import lime.utils.Assets;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Health Multiplier', 'Score Multiplier', 'Full Energy', 'Antispam', 'Bot Mode'];
+	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Bot Mode'];
+	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
+	var gameChangers:Array<String> = ['Full Energy', 'Antispam'];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 
@@ -151,6 +153,7 @@ class OptionsState extends MusicBeatState
 	}
 	function boolToOnOff(variable:Bool = true)
 	{
+		// funny bool to on-off function bc its used ez
 		if (variable)
 			return "ON";
 		else
