@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import lime.utils.Assets;
 
 // my code is shit so beware lolz
+// i have a weird feeling i did something wrong in the code.. it works though..
 
 class OptionsState extends MusicBeatState
 {
@@ -148,7 +149,7 @@ class OptionsState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				curMenu = curSelected;
-				refreshList(optionsMenus[curMenu - 1]);
+				refreshList(optionsMenus[curSelected + 1]);
 				trace(curMenu);
 			}
 			if (back)
@@ -207,6 +208,7 @@ class OptionsState extends MusicBeatState
 	function refreshList(thething:Array<String>)
 	{
 		// funny refresh list.. give it array and it kewl
+		curSelected = 0;
 		menuItems.clear();
 		for (i in 0...thething.length)
 			{
