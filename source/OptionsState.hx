@@ -64,6 +64,7 @@ class OptionsState extends MusicBeatState
 					optionText.text = boolToOnOff(antiSpam);
 				case 4:
 					optionText.text = boolToOnOff(botMode);
+					// This comment is for dev branch testing ignore
 			}
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
