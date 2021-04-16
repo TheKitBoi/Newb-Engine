@@ -18,7 +18,7 @@ class OptionsState extends MusicBeatState
 	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
-	var optionMenus:Array<Array> = [textMenuItems, multiplierItems, gameChangers];
+	var optionsMenus:Array< Array<String> > = [[],[],[]];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
@@ -34,6 +34,9 @@ class OptionsState extends MusicBeatState
 
     override public function create():Void
     {
+		optionsMenus[0] = textMenuItems;
+		optionsMenus[1] =  multiplierItems;
+		optionsMenus[2] = gameChangers;
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
 		optionText = new FlxText(1130, 10, 128, "", 100);
@@ -81,17 +84,19 @@ class OptionsState extends MusicBeatState
 
 			if (upP)
 			{
-				changeSelection(-1);
+				changeSelection(-1, optionsMenus[curMenu]);
 			}
 			if (downP)
 			{
-				changeSelection(1);
+				changeSelection(1, optionsMenus[curMenu]);
 			}
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
 			{
 				if(curMenu == 1)
-					switch(curSelected){
+				{
+					switch(curSelected)
+					{
 						case 0:
 							if (healthMultiplier >= 2)
 								healthMultiplier -= 1;
@@ -99,8 +104,11 @@ class OptionsState extends MusicBeatState
 							if (scoreMultiplier >= 2)
 								scoreMultiplier -= 1;
 					}
-				}else if(curMenu == 2){
-					switch(curSelected){
+				}
+				else if (curMenu == 2)
+				{
+					switch(curSelected)
+					{
 						case 0:
 							fullEnergy = false;
 						case 1:
@@ -113,7 +121,9 @@ class OptionsState extends MusicBeatState
 			if (controls.RIGHT_P)
 			{
 				if(curMenu == 1)
-					switch(curSelected){
+				{
+					switch(curSelected)
+					{
 						case 0:
 							if (healthMultiplier <= 4)
 								healthMultiplier += 1;
@@ -121,8 +131,11 @@ class OptionsState extends MusicBeatState
 							if (scoreMultiplier <= 4)
 								scoreMultiplier += 1;
 					}
-				}else if(curMenu == 2){
-					switch(curSelected){
+				}
+				else if(curMenu == 2)
+				{
+					switch(curSelected)
+					{
 						case 0:
 							fullEnergy = true;
 						case 1:
@@ -150,7 +163,7 @@ class OptionsState extends MusicBeatState
 			}	
 			super.update(elapsed);
 		}	
-	function changeSelection(change:Int = 0, thingie:Array = ['cool shit'])
+	function changeSelection(change:Int = 0, thingie:Array<String>)
 	{
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
@@ -189,7 +202,7 @@ class OptionsState extends MusicBeatState
 		else
 			return "OFF";
 	}
-	function refreshList(thething:Array = ['coolswag', 'stupidswag'])
+	function refreshList(thething:Array<String>)
 	{
 		// funny refresh list.. give it array and it kewl
 		menuItems.clear();
