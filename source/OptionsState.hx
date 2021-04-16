@@ -148,10 +148,12 @@ class OptionsState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				curMenu = curSelected;
-				refreshList(optionsMenus[curSelected]);
+				refreshList(optionsMenus[curMenu - 1]);
+				trace(curMenu);
 			}
 			if (back)
 			{
+				trace(curMenu);
 				if (curMenu == 0){
 					FlxG.switchState(new MainMenuState());
 				}
