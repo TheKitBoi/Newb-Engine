@@ -35,9 +35,9 @@ class OptionsState extends MusicBeatState
 
     override public function create():Void
     {
-		optionsMenus[1] = textMenuItems;
-		optionsMenus[2] =  multiplierItems;
-		optionsMenus[3] = gameChangers;
+		optionsMenus[0] = textMenuItems;
+		optionsMenus[1] =  multiplierItems;
+		optionsMenus[2] = gameChangers;
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
 		optionText = new FlxText(1130, 10, 128, "", 100);
@@ -149,8 +149,8 @@ class OptionsState extends MusicBeatState
 			}
 			if (controls.ACCEPT)
 			{
-				curMenu = curSelected;
-				refreshList(optionsMenus[curSelected]);
+				curMenu = curSelected + 1;
+				refreshList(optionsMenus[curSelected + 1]);
 				trace(curMenu);
 			}
 			if (back)
@@ -173,7 +173,8 @@ class OptionsState extends MusicBeatState
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
 
 		curSelected += change;
-		var thingie:Array<String> = optionsMenus[curSelected];
+		var thingie:Array<String> = optionsMenus[curMenu];
+		trace(thingie);
 		
 		if (curSelected < 0)
 			curSelected = thingie.length - 1;
