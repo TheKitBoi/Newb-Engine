@@ -35,9 +35,9 @@ class OptionsState extends MusicBeatState
 
     override public function create():Void
     {
-		optionsMenus[0] = textMenuItems;
-		optionsMenus[1] =  multiplierItems;
-		optionsMenus[2] = gameChangers;
+		optionsMenus[1] = textMenuItems;
+		optionsMenus[2] =  multiplierItems;
+		optionsMenus[3] = gameChangers;
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
 		optionText = new FlxText(1130, 10, 128, "", 100);
@@ -85,11 +85,11 @@ class OptionsState extends MusicBeatState
 
 			if (upP)
 			{
-				changeSelection(-1, optionsMenus[curSelected + 1]);
+				changeSelection(-1, optionsMenus[curSelected]);
 			}
 			if (downP)
 			{
-				changeSelection(1, optionsMenus[curSelected + 1]);
+				changeSelection(1, optionsMenus[curSelected]);
 			}
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
@@ -148,8 +148,8 @@ class OptionsState extends MusicBeatState
 			}
 			if (controls.ACCEPT)
 			{
-				curMenu = curSelected + 1;
-				refreshList(optionsMenus[curSelected + 1]);
+				curMenu = curSelected;
+				refreshList(optionsMenus[curSelected]);
 				trace(curMenu);
 			}
 			if (back)
