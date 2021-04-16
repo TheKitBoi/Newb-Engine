@@ -172,8 +172,8 @@ class OptionsState extends MusicBeatState
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
 
-		var thingie:Array<String> = optionsMenus[curSelected];
 		curSelected += change;
+		var thingie:Array<String> = optionsMenus[curSelected];
 		
 		if (curSelected < 0)
 			curSelected = thingie.length - 1;
