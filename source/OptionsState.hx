@@ -11,7 +11,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 
-// my code is shit so beware lol
+// my code is shit so beware lolz
 
 class OptionsState extends MusicBeatState
 {
