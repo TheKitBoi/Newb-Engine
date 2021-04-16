@@ -85,11 +85,11 @@ class OptionsState extends MusicBeatState
 
 			if (upP)
 			{
-				changeSelection(-1, optionsMenus[curSelected]);
+				changeSelection(-1);
 			}
 			if (downP)
 			{
-				changeSelection(1, optionsMenus[curSelected]);
+				changeSelection(1);
 			}
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
@@ -166,13 +166,14 @@ class OptionsState extends MusicBeatState
 			}	
 			super.update(elapsed);
 		}	
-	function changeSelection(change:Int = 0, thingie:Array<String>)
+	function changeSelection(change:Int = 0)
 	{
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
 
+		var thingie:Array<String> = optionsMenus[curSelected];
 		curSelected += change;
-
+		
 		if (curSelected < 0)
 			curSelected = thingie.length - 1;
 		if (curSelected >= thingie.length)
