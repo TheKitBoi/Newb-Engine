@@ -18,7 +18,7 @@ class OptionsState extends MusicBeatState
 	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
-	// var optionMenus:Array<Array> = [textMenuItems, multiplierItems, gameChangers];
+	var optionMenus:Array<Array> = [textMenuItems, multiplierItems, gameChangers];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
@@ -55,17 +55,24 @@ class OptionsState extends MusicBeatState
 
     override function update(elapsed:Float)
 		{
-			switch(curSelected){
-				case 0:
-					optionText.text = healthMultiplier + "x";
-				case 1:
-					optionText.text = scoreMultiplier + "x";
-				case 2:
-					optionText.text = boolToOnOff(fullEnergy);
-				case 3:
-					optionText.text = boolToOnOff(antiSpam);
-				case 4:
-					optionText.text = boolToOnOff(botMode);
+			if(curMenu == 0){
+				optionText.text = "";
+			}else if (curMenu == 1){
+				switch(curSelected){
+					case 0:
+						optionText.text = healthMultiplier + "x";
+					case 1:
+						optionText.text = scoreMultiplier + "x";
+				}
+			}else if (curMenu == 2){
+				switch(curSelected){
+					case 0:
+						optionText.text = boolToOnOff(fullEnergy);
+					case 1:
+						optionText.text = boolToOnOff(antiSpam);
+					case 2:
+						optionText.text = boolToOnOff(botMode);	
+				}
 			}
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
@@ -83,46 +90,67 @@ class OptionsState extends MusicBeatState
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
 			{
-				switch(curSelected){
-					case 0:
-						if (healthMultiplier >= 2)
-							healthMultiplier -= 1;
-					case 1:
-						if (scoreMultiplier >= 2)
-							scoreMultiplier -= 1;
-					case 2:
-						fullEnergy = false;
-					case 3:
-						antiSpam = false;
-					case 4:
-						botMode = false;
+				if(curMenu == 1)
+					switch(curSelected){
+						case 0:
+							if (healthMultiplier >= 2)
+								healthMultiplier -= 1;
+						case 1:
+							if (scoreMultiplier >= 2)
+								scoreMultiplier -= 1;
+					}
+				}else if(curMenu == 2){
+					switch(curSelected){
+						case 0:
+							fullEnergy = false;
+						case 1:
+							antiSpam = false;
+						case 2:
+							botMode = false;
+					}
 				}
 			}
 			if (controls.RIGHT_P)
 			{
-				switch(curSelected){
-					case 0:
-						if (healthMultiplier <= 4)
-							healthMultiplier += 1;
-					case 1:
-						if (scoreMultiplier <= 4)
-							scoreMultiplier += 1;
-					case 2:
-						fullEnergy = true;
-					case 3:
-						antiSpam = true;
-					case 4:
-						botMode= true;
+				if(curMenu == 1)
+					switch(curSelected){
+						case 0:
+							if (healthMultiplier <= 4)
+								healthMultiplier += 1;
+						case 1:
+							if (scoreMultiplier <= 4)
+								scoreMultiplier += 1;
+					}
+				}else if(curMenu == 2){
+					switch(curSelected){
+						case 0:
+							fullEnergy = true;
+						case 1:
+							antiSpam = true;
+						case 2:
+							botMode= true;
+					}
 				}
 			}
-
+			if (controls.ACCEPT)
+			{
+				curMenu = curSelected;
+				refreshList(optionsMenus[curSelected]);
+			}
 			if (back)
 			{
-				FlxG.switchState(new MainMenuState());
+				if (curMenu == 0){
+					FlxG.switchState(new MainMenuState());
+				}
+				else{
+					curMenu = 0;
+					refreshList(optionsMenus[0]);
+				}
+
 			}	
 			super.update(elapsed);
 		}	
-	function changeSelection(change:Int = 0)
+	function changeSelection(change:Int = 0, thingie:Array = ['cool shit'])
 	{
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);
@@ -130,8 +158,8 @@ class OptionsState extends MusicBeatState
 		curSelected += change;
 
 		if (curSelected < 0)
-			curSelected = textMenuItems.length - 1;
-		if (curSelected >= textMenuItems.length)
+			curSelected = thingie.length - 1;
+		if (curSelected >= thingie.length)
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
