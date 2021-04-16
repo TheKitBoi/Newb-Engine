@@ -85,11 +85,11 @@ class OptionsState extends MusicBeatState
 
 			if (upP)
 			{
-				changeSelection(-1, optionsMenus[curMenu]);
+				changeSelection(-1, optionsMenus[curSelected + 1]);
 			}
 			if (downP)
 			{
-				changeSelection(1, optionsMenus[curMenu]);
+				changeSelection(1, optionsMenus[curSelected + 1]);
 			}
 			// this code can probably be improved but i suck at coding so whatevz
 			if (controls.LEFT_P)
@@ -148,7 +148,7 @@ class OptionsState extends MusicBeatState
 			}
 			if (controls.ACCEPT)
 			{
-				curMenu = curSelected;
+				curMenu = curSelected + 1;
 				refreshList(optionsMenus[curSelected + 1]);
 				trace(curMenu);
 			}
