@@ -19,7 +19,7 @@ class OptionsState extends MusicBeatState
 	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
-	var optionsMenus:Array< Array<String> > = [[],[],[]];
+	var optionsMenus:Array< Array<String> > = [[],[],[],[]];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
@@ -59,6 +59,7 @@ class OptionsState extends MusicBeatState
 
     override function update(elapsed:Float)
 		{
+			trace(curSelected);
 			if(curMenu == 0){
 				optionText.text = "";
 			}else if (curMenu == 1){
