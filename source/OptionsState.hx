@@ -161,5 +161,16 @@ class OptionsState extends MusicBeatState
 		else
 			return "OFF";
 	}
-	function refreshState()
+	function refreshList(thething:Array = ['coolswag', 'stupidswag'])
+	{
+		// funny refresh list.. give it array and it kewl
+		menuItems.clear();
+		for (i in 0...thething.length)
+			{
+				var menuText:Alphabet = new Alphabet(0, (70 * i) + 30, thething[i], true, false);
+				menuText.isMenuItem = true;
+				menuText.targetY = i;
+				menuItems.add(menuText);
+			}
+	}
 }
