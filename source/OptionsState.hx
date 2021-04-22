@@ -50,7 +50,7 @@ class OptionsState extends MusicBeatState
     override function update(elapsed:Float)
 		{
 			if(curMenu == 0){
-				optionText.text = "";
+				optionText.text = " ";
 			}else if (curMenu == 1){
 				switch(curSelected){
 					case 0:
@@ -143,6 +143,7 @@ class OptionsState extends MusicBeatState
 			}
 			if (back)
 			{
+				FlxG.save.flush();
 				if (curMenu == 0){
 					FlxG.switchState(new MainMenuState());
 				}

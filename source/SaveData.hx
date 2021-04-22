@@ -21,6 +21,5 @@ class SaveData
 
         if(FlxG.save.data.botMode == null)
             FlxG.save.data.botMode = false;
-        
     }
 }
