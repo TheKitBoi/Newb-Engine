@@ -53,7 +53,6 @@ class OptionsState extends MusicBeatState
 
     override function update(elapsed:Float)
 		{
-			trace(curSelected);
 			if(curMenu == 0){
 				optionText.text = "";
 			}else if (curMenu == 1){
@@ -145,11 +144,9 @@ class OptionsState extends MusicBeatState
 			{
 				curMenu = curSelected + 1;
 				refreshList(optionsMenus[curSelected + 1]);
-				trace(curMenu);
 			}
 			if (back)
 			{
-				trace(curMenu); // testin
 				if (curMenu == 0){
 					FlxG.switchState(new MainMenuState());
 				}
@@ -168,7 +165,6 @@ class OptionsState extends MusicBeatState
 
 		curSelected += change;
 		var thingie:Array<String> = optionsMenus[curMenu];
-		trace(thingie);
 		
 		if (curSelected < 0)
 			curSelected = thingie.length - 1;
