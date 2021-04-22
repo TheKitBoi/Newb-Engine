@@ -1887,7 +1887,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || FlxG.save.data.botMode && noteDiff > Conductor.safeZoneOffset * 0.05)
+		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || FlxG.save.data.botMode && noteDiff > Conductor.safeZoneOffset * 0.01)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -1921,7 +1921,7 @@ class PlayState extends MusicBeatState
 					{
 						for (coolNote in possibleNotes)
 						{
-							if (controlArray[coolNote.noteData] || FlxG.save.data.botMode)
+							if (controlArray[coolNote.noteData] || FlxG.save.data.botMode && noteDiff > Conductor.safeZoneOffset * 0.01)
 								goodNoteHit(coolNote);
 							else
 							{
@@ -2105,7 +2105,7 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
-		if (keyP || FlxG.save.data.botMode){
+		if (keyP || FlxG.save.data.botMode && noteDiff > Conductor.safeZoneOffset * 0.01){
 			goodNoteHit(note);
 		}
 		else
