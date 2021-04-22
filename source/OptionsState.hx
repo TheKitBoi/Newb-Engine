@@ -18,12 +18,7 @@ class OptionsState extends MusicBeatState
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
 
-	// startup values might make a saving system later????? 
-	public static var healthMultiplier:Int = 1;
-	public static var scoreMultiplier:Int = 1;
-	public static var fullEnergy:Bool = true;
-	public static var antiSpam:Bool = false;
-	public static var botMode:Bool = false;
+	
 
 	private var optionText:FlxText;
 
@@ -32,6 +27,7 @@ class OptionsState extends MusicBeatState
 		optionsMenus[0] = textMenuItems;
 		optionsMenus[1] = multiplierItems;
 		optionsMenus[2] = gameChangers;
+		SaveData.saveLoad();
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
 		optionText = new FlxText(1130, 10, 128, "", 100);
