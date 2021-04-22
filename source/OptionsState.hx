@@ -1,18 +1,12 @@
 package;
 
-import flixel.FlxState;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
-import flash.text.TextField;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
 
 // my code is shit so beware lolz
-// i have a weird feeling i did something wrong in the code.. it works though..
 
 class OptionsState extends MusicBeatState
 {
@@ -36,7 +30,7 @@ class OptionsState extends MusicBeatState
     override public function create():Void
     {
 		optionsMenus[0] = textMenuItems;
-		optionsMenus[1] =  multiplierItems;
+		optionsMenus[1] = multiplierItems;
 		optionsMenus[2] = gameChangers;
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
@@ -65,18 +59,18 @@ class OptionsState extends MusicBeatState
 			}else if (curMenu == 1){
 				switch(curSelected){
 					case 0:
-						optionText.text = healthMultiplier + "x";
+						optionText.text = FlxG.save.data.healthMultiplier + "x";
 					case 1:
-						optionText.text = scoreMultiplier + "x";
+						optionText.text = FlxG.save.data.scoreMultiplier + "x";
 				}
 			}else if (curMenu == 2){
 				switch(curSelected){
 					case 0:
-						optionText.text = boolToOnOff(fullEnergy);
+						optionText.text = boolToOnOff(FlxG.save.data.fullEnergy);
 					case 1:
-						optionText.text = boolToOnOff(antiSpam);
+						optionText.text = boolToOnOff(FlxG.save.data.antiSpam);
 					case 2:
-						optionText.text = boolToOnOff(botMode);	
+						optionText.text = boolToOnOff(FlxG.save.data.botMode);	
 				}
 			}
 			var upP = controls.UP_P;
@@ -100,11 +94,11 @@ class OptionsState extends MusicBeatState
 					switch(curSelected)
 					{
 						case 0:
-							if (healthMultiplier >= 2)
-								healthMultiplier -= 1;
+							if (FlxG.save.data.healthMultiplier >= 2)
+								FlxG.save.data.healthMultiplier -= 1;
 						case 1:
-							if (scoreMultiplier >= 2)
-								scoreMultiplier -= 1;
+							if (FlxG.save.data.scoreMultiplier >= 2)
+								FlxG.save.data.scoreMultiplier -= 1;
 					}
 				}
 				else if (curMenu == 2)
@@ -112,11 +106,11 @@ class OptionsState extends MusicBeatState
 					switch(curSelected)
 					{
 						case 0:
-							fullEnergy = false;
+							FlxG.save.data.fullEnergy = false;
 						case 1:
-							antiSpam = false;
+							FlxG.save.data.antiSpam = false;
 						case 2:
-							botMode = false;
+							FlxG.save.data.botMode = false;
 					}
 				}
 			}
@@ -127,11 +121,11 @@ class OptionsState extends MusicBeatState
 					switch(curSelected)
 					{
 						case 0:
-							if (healthMultiplier <= 4)
-								healthMultiplier += 1;
+							if (FlxG.save.data.healthMultiplier <= 4)
+								FlxG.save.data.healthMultiplier += 1;
 						case 1:
-							if (scoreMultiplier <= 4)
-								scoreMultiplier += 1;
+							if (FlxG.save.data.scoreMultiplier <= 4)
+								FlxG.save.data.scoreMultiplier += 1;
 					}
 				}
 				else if(curMenu == 2)
@@ -139,11 +133,11 @@ class OptionsState extends MusicBeatState
 					switch(curSelected)
 					{
 						case 0:
-							fullEnergy = true;
+							FlxG.save.data.fullEnergy = true;
 						case 1:
-							antiSpam = true;
+							FlxG.save.data.antiSpam = true;
 						case 2:
-							botMode= true;
+							FlxG.save.data.botMode= true;
 					}
 				}
 			}

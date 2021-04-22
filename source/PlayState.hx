@@ -130,7 +130,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		if (OptionsState.fullEnergy)
+		if (FlxG.save.data.fullEnergy)
 			health = 2;
 		else
 			health = 1;
@@ -700,7 +700,7 @@ class PlayState extends MusicBeatState
 		botTxt = new FlxText(healthBarBG.x + healthBarBG.width - 225, healthBarBG.y, "Bot Mode Enabled", 15);
 		botTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, CENTER);
 		botTxt.scrollFactor.set();
-		if (OptionsState.botMode)
+		if (FlxG.save.data.botMode)
 			add(botTxt);
 
 		iconP1 = new HealthIcon(SONG.player1, true);
@@ -1603,7 +1603,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							health -= 0.0475 * OptionsState.healthMultiplier;
+							health -= 0.0475 * FlxG.save.data.healthMultiplier;
 							vocals.volume = 0;
 							misses += 1;
 						}
@@ -1642,7 +1642,7 @@ class PlayState extends MusicBeatState
 
 		if (isStoryMode)
 		{
-			if(!OptionsState.botMode)
+			if(!FlxG.save.data.botMode)
 				campaignScore += songScore;
 
 			storyPlaylist.remove(storyPlaylist[0]);
@@ -1746,7 +1746,7 @@ class PlayState extends MusicBeatState
 			score = 200;
 		}
 
-		songScore += score * OptionsState.scoreMultiplier;
+		songScore += score * Std.int(FlxG.save.data.scoreMultiplier);
 
 		/* if (combo > 60)
 				daRating = 'sick';
@@ -1887,7 +1887,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || OptionsState.botMode && noteDiff > Conductor.safeZoneOffset * 0)
+		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic || FlxG.save.data.botMode && noteDiff > Conductor.safeZoneOffset * 0)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -1921,7 +1921,7 @@ class PlayState extends MusicBeatState
 					{
 						for (coolNote in possibleNotes)
 						{
-							if (controlArray[coolNote.noteData] || OptionsState.botMode)
+							if (controlArray[coolNote.noteData] || FlxG.save.data.botMode)
 								goodNoteHit(coolNote);
 							else
 							{
@@ -2013,22 +2013,22 @@ class PlayState extends MusicBeatState
 				case 0:
 					if (leftP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (leftR || OptionsState.botMode)
+					if (leftR || FlxG.save.data.botMode)
 						spr.animation.play('static');
 				case 1:
 					if (downP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (downR || OptionsState.botMode)
+					if (downR || FlxG.save.data.botMode)
 						spr.animation.play('static');
 				case 2:
 					if (upP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (upR || OptionsState.botMode)
+					if (upR || FlxG.save.data.botMode)
 						spr.animation.play('static');
 				case 3:
 					if (rightP && spr.animation.curAnim.name != 'confirm')
 						spr.animation.play('pressed');
-					if (rightR || OptionsState.botMode)
+					if (rightR || FlxG.save.data.botMode)
 						spr.animation.play('static');
 			}
 
@@ -2048,14 +2048,14 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			misses += 1;
-			health -= 0.04 * OptionsState.healthMultiplier;
+			health -= 0.04 * FlxG.save.data.healthMultiplier;
 			if (combo > 5)
 			{
 				gf.playAnim('sad');
 			}
 			combo = 0;
 
-			songScore -= 10 * OptionsState.scoreMultiplier;
+			songScore -= 10 * Std.int(FlxG.save.data.scoreMultiplier);
 
 			FlxG.sound.play('assets/sounds/missnote' + FlxG.random.int(1, 3) + TitleState.soundExt, FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play('assets/sounds/missnote1' + TitleState.soundExt, 1, false);
@@ -2085,7 +2085,7 @@ class PlayState extends MusicBeatState
 
 	function badNoteCheck()
 	{
-		if(OptionsState.antiSpam && !OptionsState.botMode)
+		if(FlxG.save.data.antiSpam && !FlxG.save.data.botMode)
 		{
 			var upP = controls.UP_P;
 			var rightP = controls.RIGHT_P;
@@ -2105,7 +2105,7 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
-		if (keyP || OptionsState.botMode){
+		if (keyP || FlxG.save.data.botMode){
 			goodNoteHit(note);
 		}
 		else
@@ -2125,9 +2125,9 @@ class PlayState extends MusicBeatState
 			}
 
 			if (note.noteData >= 0)
-				health += 0.023 * OptionsState.healthMultiplier;
+				health += 0.023 * FlxG.save.data.healthMultiplier;
 			else
-				health += 0.004 * OptionsState.healthMultiplier;
+				health += 0.004 * FlxG.save.data.healthMultiplier;
 
 			switch (note.noteData)
 			{
