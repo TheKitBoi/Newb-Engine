@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' Newb Engine" file="Newb" packageName="Newb Engine" main="Main" version="NE0.3" company="hdboye" />
+	<app title="Friday Night Funkin' Newb Engine" file="Newb" packageName="Newb Engine" main="Main" version="PRE-NE0.3" company="hdboye" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
