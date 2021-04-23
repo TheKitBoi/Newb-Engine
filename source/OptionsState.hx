@@ -10,7 +10,7 @@ import flixel.util.FlxColor;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers'];
+	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Reset Save File'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
 	var optionsMenus:Array< Array<String> > = [[],[],[],[]];
@@ -138,8 +138,16 @@ class OptionsState extends MusicBeatState
 			}
 			if (controls.ACCEPT)
 			{
-				curMenu = curSelected + 1;
-				refreshList(optionsMenus[curSelected + 1]);
+				if(curMenu == 0){
+					if(curSelected != 2){
+						curMenu = curSelected + 1;
+						refreshList(optionsMenus[curSelected + 1]);
+					}
+					else if(curSelected == 2){
+						SaveData.resetSave();
+						refreshList(optionsMenus[0]);
+					}
+				}
 			}
 			if (back)
 			{

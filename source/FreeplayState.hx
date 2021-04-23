@@ -9,6 +9,9 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+#if sys
+import sys.FileSystem;
+#end
 
 using StringTools;
 
@@ -74,8 +77,13 @@ class FreeplayState extends MusicBeatState
 		// load extra songs
 		// this code can PROBABLY be a lot better but its what i get from googling shit
 		#if sys
-		var exsongs = sys.FileSystem.readDirectory("assets/songs");
-		addWeek(exsongs, 7, ['dad']);
+		if(sys.FileSystem.isDirectory("./assets/songs"))
+		{
+			trace("yes!");
+			var exsongs = sys.FileSystem.readDirectory("./assets/songs");
+			trace(exsongs);
+			addWeek(exsongs, 7, ['dad']);
+		}
 		#end
 
 		// LOAD MUSIC
@@ -219,8 +227,10 @@ class FreeplayState extends MusicBeatState
 			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 
 			trace(poop);
-
-			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+			if(songs[curSelected].week == 7)
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase(), true);
+			else
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase(), false);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 
@@ -256,9 +266,6 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-		#if !switch
-		NGio.logEvent('Fresh');
-		#end
 
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play('assets/sounds/scrollMenu' + TitleState.soundExt, 0.4);

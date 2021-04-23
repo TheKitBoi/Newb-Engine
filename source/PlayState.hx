@@ -51,6 +51,7 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 	public static var noteDiff:Float;
+	public static var custom:Bool = false;
 
 	var halloweenLevel:Bool = false;
 
@@ -996,7 +997,10 @@ class PlayState extends MusicBeatState
 		lastReportedPlayheadPosition = 0;
 
 		if (!paused)
-			FlxG.sound.playMusic("assets/music/" + SONG.song + "_Inst" + TitleState.soundExt, 1, false);
+			if(!custom)
+				FlxG.sound.playMusic("assets/music/" + SONG.song + "_Inst" + TitleState.soundExt, 1, false);
+			else
+				FlxG.sound.playMusic("assets/songs/" + SONG.song + "/" + SONG.song + "_Inst" + TitleState.soundExt, 1, false);
 		FlxG.sound.music.onComplete = endSong;
 		vocals.play();
 	}
@@ -1013,7 +1017,10 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 
 		if (SONG.needsVoices)
-			vocals = new FlxSound().loadEmbedded("assets/music/" + curSong + "_Voices" + TitleState.soundExt);
+			if(!custom)
+				vocals = new FlxSound().loadEmbedded("assets/music/" + curSong + "_Voices" + TitleState.soundExt);
+			else
+				vocals = new FlxSound().loadEmbedded("assets/songs/" + curSong + "/" + curSong + "_Voices" + TitleState.soundExt);
 		else
 			vocals = new FlxSound();
 

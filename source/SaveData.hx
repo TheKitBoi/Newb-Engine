@@ -22,4 +22,14 @@ class SaveData
         if(FlxG.save.data.botMode == null)
             FlxG.save.data.botMode = false;
     }
+
+    public static function resetSave()
+    {
+        FlxG.save.data.healthMultiplier = null;
+        FlxG.save.data.scoreMultiplier = null;
+        FlxG.save.data.fullEnergy = null;
+        FlxG.save.data.antiSpam = null;
+        FlxG.save.data.botMode = null;
+        saveLoad();
+    }
 }
