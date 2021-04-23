@@ -57,8 +57,7 @@ class FreeplayState extends MusicBeatState
 			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
 
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
-			addWeek(['Spookeez', 'South'], 2, ['spooky']);
-			addSong('Monster', 2, 'monster');
+			addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', 'monster']);
 
 		if (StoryMenuState.weekUnlocked[3] || isDebug)
 			addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
@@ -71,6 +70,13 @@ class FreeplayState extends MusicBeatState
 
 		if (StoryMenuState.weekUnlocked[6] || isDebug)
 			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
+
+		// load extra songs
+		// this code can PROBABLY be a lot better but its what i get from googling shit
+		#if sys
+		var exsongs = sys.FileSystem.readDirectory("assets/songs");
+		addWeek(exsongs, 7, ['dad']);
+		#end
 
 		// LOAD MUSIC
 
