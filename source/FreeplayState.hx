@@ -75,11 +75,10 @@ class FreeplayState extends MusicBeatState
 			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
 
 		// load extra songs
-		// this code can PROBABLY be a lot better but its what i get from googling shit
+		// i will use lime.assets in post-week7 dont bully me pls :(
 		#if sys
 		if(sys.FileSystem.isDirectory("./assets/songs"))
 		{
-			trace("yes!");
 			var exsongs = sys.FileSystem.readDirectory("./assets/songs");
 			trace(exsongs);
 			addWeek(exsongs, 7, ['dad']);
