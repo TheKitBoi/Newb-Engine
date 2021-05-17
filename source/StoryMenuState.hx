@@ -425,7 +425,7 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in stringThing)
 		{
-			txtTracklist.text += "\n" + i;
+			txtTracklist.text += "\n" + i;	
 		}
 
 		txtTracklist.text = txtTracklist.text.toUpperCase();
