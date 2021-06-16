@@ -183,8 +183,8 @@ jobs:
         with:
           name: linuxBuild
           path: bin.tar.gz
-  buildWindows:
-    runs-on: windows-latest
+  buildHtml:
+    runs-on: ubuntu-latest
     
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
