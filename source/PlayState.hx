@@ -1610,9 +1610,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							health -= 0.0475 * FlxG.save.data.healthMultiplier;
-							vocals.volume = 0;
-							misses += 1;
+							noteMiss(daNote.direction);
 						}
 
 						daNote.active = false;
@@ -2055,7 +2053,8 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			misses += 1;
-			health -= 0.04 * FlxG.save.data.healthMultiplier;
+			vocals.volume = 0;
+			health -= 0.0475 * FlxG.save.data.healthMultiplier;
 			if (combo > 5)
 			{
 				gf.playAnim('sad');
