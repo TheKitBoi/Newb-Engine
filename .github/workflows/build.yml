@@ -174,4 +174,7 @@ jobs:
       - name: GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
         with:
+          target_branch: gh-pages
           build_dir: export/release/html5/bin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
