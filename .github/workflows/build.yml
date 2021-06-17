@@ -139,47 +139,8 @@ jobs:
         with:
           name: macBuild
           path: bin.tar.gz
-  buildMac:
-    runs-on: macos-latest
-
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.1.5
-      # Runs a set of commands using the runners shell
-      - name: Install Haxelib
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
-          haxelib install newgrounds
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib install hxcpp-debug-server
-          haxelib list
-      - name: Create APIStuff
-        run: echo "package;class APIStuff{public static var API:String = '';public static var EncKey:String = '';}" > source/APIStuff.hx
-      - name: Compile
-        run: haxelib run lime build mac 
-      - name: Archive
-        run: tar -czf bin.tar.gz export/release/macos/bin
-      - name: Publish Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: macBuild
-          path: bin.tar.gz
   buildHtml:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
