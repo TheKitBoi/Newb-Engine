@@ -1610,7 +1610,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							noteMiss(daNote.direction);
+							noteMiss(daNote.noteData);
 						}
 
 						daNote.active = false;
