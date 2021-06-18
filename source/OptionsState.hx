@@ -10,7 +10,7 @@ import flixel.util.FlxColor;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Noteskins' 'Reset Save File'];
+	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Noteskins', 'Reset Save File'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
 	public static var noteSkins:Array<String> = ['normal', 'pixel'];
