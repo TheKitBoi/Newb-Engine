@@ -21,6 +21,9 @@ class SaveData
 
         if(FlxG.save.data.botMode == null)
             FlxG.save.data.botMode = false;
+
+        if(FlxG.save.data.noteSkin == null)
+            FlxG.save.data.noteSkin = 0;
     }
 
     public static function resetSave()
@@ -30,6 +33,7 @@ class SaveData
         FlxG.save.data.fullEnergy = null;
         FlxG.save.data.antiSpam = null;
         FlxG.save.data.botMode = null;
+        FlxG.save.data.noteSkin = 0;
         saveLoad();
     }
 }

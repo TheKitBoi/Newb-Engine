@@ -10,23 +10,24 @@ import flixel.util.FlxColor;
 
 class OptionsState extends MusicBeatState
 {
-	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Reset Save File'];
+	var textMenuItems:Array<String> = ['Multipliers', 'Gamechangers', 'Noteskins' 'Reset Save File'];
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
+	public static var noteSkins:Array<String> = ['normal', 'pixel'];
 	var optionsMenus:Array< Array<String> > = [[],[],[],[]];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
 
-	
-
 	private var optionText:FlxText;
 
     override public function create():Void
     {
+		noteSkins = CoolUtil.coolTextFile("assets/skins/skins.txt");
 		optionsMenus[0] = textMenuItems;
 		optionsMenus[1] = multiplierItems;
 		optionsMenus[2] = gameChangers;
+		optionsMenus[3] = noteSkins;
 		SaveData.saveLoad();
 		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
 		add(bg);
@@ -67,6 +68,8 @@ class OptionsState extends MusicBeatState
 					case 2:
 						optionText.text = boolToOnOff(FlxG.save.data.botMode);	
 				}
+			}else if (curMenu == 3){
+				optionText.text = noteSkins[FlxG.save.data.noteSkin];
 			}
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
@@ -108,6 +111,14 @@ class OptionsState extends MusicBeatState
 							FlxG.save.data.botMode = false;
 					}
 				}
+				else if (curMenu == 3)
+				{
+					switch(curSelected)
+					{
+						case 0:
+							FlxG.save.data.
+					}
+				}
 			}
 			if (controls.RIGHT_P)
 			{
@@ -147,6 +158,8 @@ class OptionsState extends MusicBeatState
 						SaveData.resetSave();
 						refreshList(optionsMenus[0]);
 					}
+				}else if(curMenu == 3){
+					FlxG.save.data.noteSkin = curSelected;
 				}
 			}
 			if (back)
@@ -197,7 +210,7 @@ class OptionsState extends MusicBeatState
 	}
 	function boolToOnOff(variable:Bool = true)
 	{
-		// funny bool to on-off function bc its used ez
+		// i like clean code fuck u
 		if (variable)
 			return "ON";
 		else
