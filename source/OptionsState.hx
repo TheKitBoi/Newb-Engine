@@ -111,14 +111,6 @@ class OptionsState extends MusicBeatState
 							FlxG.save.data.botMode = false;
 					}
 				}
-				else if (curMenu == 3)
-				{
-					switch(curSelected)
-					{
-						case 0:
-							FlxG.save.data.
-					}
-				}
 			}
 			if (controls.RIGHT_P)
 			{
