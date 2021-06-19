@@ -25,11 +25,13 @@ class MainMenuState extends MusicBeatState
 	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'options', 'donate'];
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'options'];
 	#end
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+	
+	var menuChar:MenuCharacter;
 
 	override function create()
 	{
@@ -66,6 +68,13 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		// magenta.scrollFactor.set();
+		
+		menuChar = new MenuCharacter(250, "bf", true);
+		menuChar.screenCenter(Y);
+		menuChar.scrollFactor.set(0);
+		menuChar.x = 100;
+		menuChar.y += 50;
+		add(menuChar);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -144,6 +153,7 @@ class MainMenuState extends MusicBeatState
 					FlxG.sound.play('assets/sounds/confirmMenu' + TitleState.soundExt);
 
 					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+					menuChar.animation.play("bfConfirm", true);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -188,6 +198,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.screenCenter(X);
+			spr.x += 200;
 		});
 	}
 
