@@ -3,6 +3,7 @@ package;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.FlxG;
 
 using StringTools;
 
@@ -301,8 +302,8 @@ class Character extends FlxSprite
 				addOffset('scared', -4);
 
 				playAnim('idle');
-
-				flipX = true;
+				if(FlxG.state != new MainMenuState())
+					flipX = true;
 
 			case 'bf-christmas':
 				var tex = FlxAtlasFrames.fromSparrow('assets/images/christmas/bfChristmas.png', 'assets/images/christmas/bfChristmas.xml');

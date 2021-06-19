@@ -31,7 +31,7 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	
-	var menuChar:MenuCharacter;
+	var menuChar:Character;
 
 	override function create()
 	{
@@ -69,11 +69,12 @@ class MainMenuState extends MusicBeatState
 		add(magenta);
 		// magenta.scrollFactor.set();
 		
-		menuChar = new MenuCharacter(250, "bf", true);
+		menuChar = new Character(250, 0, "bf");
 		menuChar.screenCenter(Y);
 		menuChar.scrollFactor.set(0);
 		menuChar.x = 100;
 		menuChar.y += 50;
+		menuChar.playAnim("idle", true, false, 0);
 		add(menuChar);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -153,8 +154,8 @@ class MainMenuState extends MusicBeatState
 					FlxG.sound.play('assets/sounds/confirmMenu' + TitleState.soundExt);
 
 					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-					menuChar.animation.play("bfConfirm", true);
-
+					menuChar.playAnim("hey", true);
+					
 					menuItems.forEach(function(spr:FlxSprite)
 					{
 						if (curSelected != spr.ID)
