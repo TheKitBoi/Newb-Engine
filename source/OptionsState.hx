@@ -14,7 +14,7 @@ class OptionsState extends MusicBeatState
 	var multiplierItems:Array<String> = ['Health Multiplier', 'Score Multiplier'];
 	var gameChangers:Array<String> = ['Full Energy', 'Antispam', 'Bot Mode'];
 	public static var noteSkins:Array<String> = ['normal', 'pixel'];
-	var optionsMenus:Array< Array<String> > = [[],[],[],[]];
+	var optionsMenus:Array< Array<String> > = [[],[],[],[],[]];
 	var menuItems:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var curMenu:Int = 0;
@@ -150,7 +150,8 @@ class OptionsState extends MusicBeatState
 						SaveData.resetSave();
 						refreshList(optionsMenus[0]);
 					}
-				}else if(curMenu == 3){
+				}
+				if(curMenu == 3){
 					FlxG.save.data.noteSkin = curSelected;
 				}
 			}

@@ -1116,7 +1116,7 @@ class PlayState extends MusicBeatState
 		{
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
-
+		
 			if(OptionsState.noteSkins[FlxG.save.data.noteSkin] == "pixel")
 				babyArrow.loadGraphic('assets/skins/pixel.png', true, 17, 17);
 			else
